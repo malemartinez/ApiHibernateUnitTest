@@ -8,11 +8,7 @@ import com.ApiHibernateCrud.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * Employee JPA Interface
- * @author javatechnolessons
- * @version 1.0
- */
+
 @Repository
 public interface IEmployeeJpaRepository extends JpaRepository<Employee, Long> {
     // select fields from employee where employeeid='[param]'
