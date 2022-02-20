@@ -35,7 +35,7 @@ public class RoleService {
         return iRoleJpaRepository.findById(id);
     }
 
-    public boolean eliminarProyecto(Long id) {
+    public boolean eliminarRol(Long id) {
         try{
             iRoleJpaRepository.deleteById(id);
             return true;

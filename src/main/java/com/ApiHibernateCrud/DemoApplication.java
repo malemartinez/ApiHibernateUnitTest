@@ -3,11 +3,6 @@ package com.ApiHibernateCrud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Spring Boot demo application
- * @author javatechnolessons
- * @version 1.0
- */
 @SpringBootApplication
 public class DemoApplication {
 
