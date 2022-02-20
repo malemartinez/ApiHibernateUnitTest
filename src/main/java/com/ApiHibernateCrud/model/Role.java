@@ -6,11 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * Represents a role entity
- * @author javatechnolessons
- * @version 1.0
- */
 @Entity
 public class Role {
     @Id
@@ -31,9 +26,6 @@ public class Role {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

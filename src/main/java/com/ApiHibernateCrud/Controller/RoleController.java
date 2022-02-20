@@ -1,7 +1,8 @@
 package com.ApiHibernateCrud.Controller;
 
-import com.ApiHibernateCrud.Service.ProjectService;
+import com.ApiHibernateCrud.Service.RoleService;
 import com.ApiHibernateCrud.model.Project;
+import com.ApiHibernateCrud.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,24 +12,24 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/projects")
-public class ProjectController {
+@RequestMapping("/Roles")
+public class RoleController {
 
     @Autowired
-    ProjectService projectService;
+    RoleService roleService;
 
 
 
     @GetMapping()
-    public ArrayList<Project> obtenerProyectos(){
+    public ArrayList<Role> obtenerRoles(){
 
-        return projectService.obtenerProyectos();
+        return roleService.obtenerRoles();
     }
 
     @PostMapping()
-    public ResponseEntity<String> guardarProyecto(@RequestBody Project project){
+    public ResponseEntity<String> guardarRol(@RequestBody Role role){
 
-        this.projectService.guardarProyecto(project);
+        this.roleService.guardarRol(role);
         return new ResponseEntity<>( "Proyecto Creado", HttpStatus.CREATED);
 
 
@@ -36,23 +37,23 @@ public class ProjectController {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<String> ActualizarNombre(@RequestParam("name")  String name, @PathVariable("id") Long id){
-        this.projectService.actualizarnombre(name , id);
+        this.roleService.actualizarnombre(name , id);
         return new ResponseEntity<>( "Nombre de proyecto actualizado", HttpStatus.OK);
     }
 
     @GetMapping( path = "/{id}")
-    public Optional<Project> obtenerUsuarioPorId(@PathVariable("id") Long id) {
-        return this.projectService.obtenerPorId(id);
+    public Optional<Role> obtenerRolPorId(@PathVariable("id") Long id) {
+        return this.roleService.obtenerPorId(id);
     }
 
 
     @DeleteMapping( path = "/{id}")
     public String eliminarPorId(@PathVariable("id") Long id){
-        boolean ok = this.projectService.eliminarProyecto(id);
+        boolean ok = this.roleService.eliminarProyecto(id);
         if (ok){
-            return "Se eliminó el proyecto con id " + id;
+            return "Se eliminó el Rol con id " + id;
         }else{
-            return "No pudo eliminar el proyecto con id" + id;
+            return "No pudo eliminar el Rol con id" + id;
         }
     }
 }

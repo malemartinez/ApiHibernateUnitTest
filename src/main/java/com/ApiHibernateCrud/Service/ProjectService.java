@@ -4,10 +4,12 @@ import com.ApiHibernateCrud.model.Project;
 import com.ApiHibernateCrud.repository.IProjectJpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Service
 public class ProjectService {
 
     IProjectJpaRepository iProjectJpaRepository;
