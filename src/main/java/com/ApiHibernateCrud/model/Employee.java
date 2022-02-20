@@ -35,11 +35,12 @@ public class Employee {
     }
  
 
-    public Employee(String firstName, String lastName, String employeeid, Role role) {
+    public Employee(String firstName, String lastName, String employeeid, Role role ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeid = employeeid;
         this.role = role;
+
     }
 
     public Long getId() {
@@ -95,6 +96,7 @@ public class Employee {
     }
 
     public void setProjects(List<Project> projects) {
+
         this.projects = projects;
     }
 

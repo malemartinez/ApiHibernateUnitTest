@@ -5,6 +5,7 @@ import com.ApiHibernateCrud.Service.EmployeeService;
 import com.ApiHibernateCrud.model.Employee;
 import com.ApiHibernateCrud.model.Project;
 import com.ApiHibernateCrud.repository.IEmployeeJpaRepository;
+import com.ApiHibernateCrud.repository.IProjectJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class EmployeeController {
 
     @Autowired
     IEmployeeJpaRepository iEmployeeJpaRepository;
+
+    @Autowired
+    IProjectJpaRepository iProjectJpaRepository;
 
     @GetMapping()
     public ResponseEntity<List<Employee>> getAllEmployee() {
@@ -49,10 +53,12 @@ public class EmployeeController {
 
 
     @PostMapping()
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee, @RequestParam("Project")List<Project> projects) {
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee, @RequestParam( "project") String project) {
         try {
             Employee emplo = new Employee(employee.getFirstName(), employee.getLastName(), employee.getEmployeeid(), employee.getRole());
-            emplo.setProjects(projects);
+            Project _project = iProjectJpaRepository.findByName(project);
+            emplo.getProjects().add(_project);
+
             Employee _employee = iEmployeeJpaRepository.save(emplo);
             return new ResponseEntity<>(_employee, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -61,7 +67,7 @@ public class EmployeeController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee ,@RequestParam("Project")List<Project> projects) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee ,@RequestParam("Project")String projects) {
         Optional<Employee> emplData = iEmployeeJpaRepository.findById(id);
 
         if (emplData.isPresent()) {
@@ -70,14 +76,16 @@ public class EmployeeController {
             _Employee.setLastName( employee.getLastName() );
             _Employee.setEmployeeid( employee.getEmployeeid() );
             _Employee.setRole( employee.getRole() );
-            _Employee.setProjects(projects);
+            Project _project = iProjectJpaRepository.findByName(projects);
+            _Employee.getProjects().add(_project);
+            _Employee.setProjects(_Employee.getProjects());
             return new ResponseEntity<>(iEmployeeJpaRepository.save(_Employee), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    //HttpStatus
+
     @DeleteMapping( path = "{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") long id) {
         try {
