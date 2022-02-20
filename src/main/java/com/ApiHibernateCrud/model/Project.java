@@ -6,11 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * Represents a project entity
- * @author javatechnolessons
- * @version 1.0
- */
 @Entity
 public class Project {
     @Id
@@ -29,10 +24,6 @@ public class Project {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
